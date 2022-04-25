@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 
 const Counter = () => {
-
-    const [count, setCount] = useState(2)
+    
+    const [count, setCount] = useState(88)
 
     function increment() {
     setCount(count + 1)
