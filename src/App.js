@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import Postitem from './components/Postitem';
 import PostList from './components/PostList';
 import './styles/App.css';
+import MyButton from './components/UI/button/MyButtons';
+import MyInput from './components/UI/input/MyInput';
 
 
 function App() {
@@ -13,18 +14,17 @@ function App() {
     {id: 4, title: 'JavaScript',body: 'JavaScript - язык программирования'}
   ])
 
-  const [post2, setPost2] = useState([
-    { id: 1, title: 'Pyhton',body: 'JavaScript - язык программирования'},
-    { id: 2, title: 'Pyhton',body: 'JavaScript - язык программирования'},
-    { id: 3, title: 'Pyhton',body: 'JavaScript - язык программирования'},
-    { id: 4, title: 'Pyhton',body: 'JavaScript - язык программирования'}
-  ])
+ 
 
   return (
     
     <div className='App'>
-      <PostList posts={post} title='Список постов 1' />
-      <PostList posts={post2} title='Список постов 2' />
+      <form>
+        <MyInput type="text" placeholder='название поста'/>
+        <MyInput type="text" placeholder='описание поста'/>
+        <MyButton disabled>Создать пост</MyButton>
+      </form>
+      <PostList posts={post} title="Посты про js"/>
     </div>
 
   );
