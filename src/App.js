@@ -14,9 +14,10 @@ function App() {
     { id: 4, title: 'JavaScript', body: 'JavaScript - язык программирования' }
   ])
 
-  const [title, setTitle] = useState('0')
-  const addNewPost = (e) => {
-    e.preventDefault()
+  const [title, setTitle] = useState('')
+
+  const addNewPost = (event) => {
+    event.preventDefault()
     console.log(title)
   }
 
