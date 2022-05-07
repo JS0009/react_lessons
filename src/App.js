@@ -15,8 +15,9 @@ function App() {
   ])
 
   const [title, setTitle] = useState('0')
-  const addNewPost = () => {
-
+  const addNewPost = (e) => {
+    e.preventDefault()
+    console.log(title)
   }
 
   return (
@@ -30,7 +31,7 @@ function App() {
           type="text"
           placeholder='название поста' />
         <MyInput type="text" placeholder='описание поста' />
-        <MyButton disabled onClick={addNewPost}>Создать пост</MyButton>
+        <MyButton onClick={addNewPost}>Создать пост</MyButton>
       </form>
       <PostList posts={post} title="Посты про js" />
     </div>
