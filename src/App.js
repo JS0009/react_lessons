@@ -33,11 +33,13 @@ function App() {
           onChange={e => setTitle(e.target.value)}
           type="text"
           placeholder='название поста' />
-        <input ref={bodyInputRef} type="text" />
-        {/* <MyInput
+
+        {/* <input ref={bodyInputRef} type="text" /> */}
+        <MyInput
           ref={bodyInputRef}
           type="text"
-          placeholder='описание поста' /> */}
+          placeholder='описание поста' />
+
         <MyButton onClick={addNewPost}>Создать пост</MyButton>
       </form>
       <PostList posts={post} title="Посты про js" />
