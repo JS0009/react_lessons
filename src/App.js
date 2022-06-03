@@ -1,8 +1,9 @@
-import React, { useRef, useState } from 'react';
+import React, { useState } from 'react';
+import PostForm from './components/PostForm';
 import PostList from './components/PostList';
+import Myselect from './components/UI/select/Myselect';
 import './styles/App.css';
-import MyButton from './components/UI/button/MyButtons';
-import MyInput from './components/UI/input/MyInput';
+
 
 
 function App() {
@@ -14,36 +15,32 @@ function App() {
     { id: 4, title: 'JavaScript', body: 'JavaScript - язык программирования' }
   ])
 
-  const [title, setTitle] = useState('')
-  const [body, setBody] = useState('')
-
-
-  const addNewPost = (event) => {
-    event.preventDefault()
-    console.log(title)
-    console.log(body)
+  const createPost = (newPost) => {
+    setPost([...post, newPost])
   }
+
+  const postRemove = (postrm) => {
+    setPost(post.filter(p => p.id !== postrm.id))
+  }
+
 
   return (
 
     <div className='App'>
-      <form>
-        {/* Управляемый компонет */}
-        <MyInput
-          value={title}
-          onChange={e => setTitle(e.target.value)}
-          type="text"
-          placeholder='название поста' />
+      <PostForm create={createPost} />
+      <Myselect defaultValue='Сортировка' options={[
+        { value: 'title', name: 'по названию' },
+        { value: 'body', name: 'по описанию' }
+      ]} />
+      {post.length !== 0
+        ?
+        <PostList remove={postRemove} posts={post} title="Посты про js" />
+        :
+        <h1 style={{ textAling: 'centr' }}>
+          Нет постов
+        </h1>
+      }
 
-        <MyInput
-          value={body}
-          onChange={e => setBody(e.target.value)}
-          type="text"
-          placeholder='описание поста' />
-
-        <MyButton onClick={addNewPost}>Создать пост</MyButton>
-      </form>
-      <PostList posts={post} title="Посты про js" />
     </div>
 
   );
