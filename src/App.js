@@ -15,6 +15,8 @@ function App() {
     { id: 4, title: 'JavaScript', body: 'JavaScript - язык программирования' }
   ])
 
+  const [selectedSort, setSelectedSort] = useState('')
+
   const createPost = (newPost) => {
     setPost([...post, newPost])
   }
@@ -23,15 +25,24 @@ function App() {
     setPost(post.filter(p => p.id !== postrm.id))
   }
 
+  const sortPost = (sort) => {
+    setSelectedSort(sort)
+    console.log(sort)
+  }
 
   return (
 
     <div className='App'>
       <PostForm create={createPost} />
-      <Myselect defaultValue='Сортировка' options={[
-        { value: 'title', name: 'по названию' },
-        { value: 'body', name: 'по описанию' }
-      ]} />
+      <Myselect
+        value={selectedSort}
+        onChange={sortPost}
+        defaultValue={'Сортировка'}
+        options={[
+          { value: 'title', name: 'по названию' },
+          { value: 'body', name: 'по описанию' }
+        ]}
+      />
       {post.length !== 0
         ?
         <PostList remove={postRemove} posts={post} title="Посты про js" />
