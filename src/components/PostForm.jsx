@@ -13,7 +13,7 @@ function PostForm({create}) {
           ...posts, id: Date.now()
     }
     create(newPost)
-    setPosts({ title: '', body: '' })
+    // setPosts({ title: '', body: '' })
   }
 
 

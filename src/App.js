@@ -5,7 +5,6 @@ import Myselect from './components/UI/select/Myselect';
 import './styles/App.css';
 
 
-
 function App() {
 
   const [post, setPost] = useState([
@@ -22,7 +21,7 @@ function App() {
   }
 
   const postRemove = (postrm) => {
-    setPost(post.filter(p => p.id !== postrm.id))
+    setPost(post.filter(post => post.id !== postrm.id))
   }
 
   const sortPost = (sort) => {
