@@ -10,7 +10,7 @@ const Myselect = ({ options, defaultValue, value, onChange }) => {
                 <hr style={{ margin: '15px 0px' }}/>
                 
                         <option disabled value=''>{defaultValue}</option>
-                        {options.map(option =>  
+                        {options.map(option =>
                         <option key={option.value} value={option.value}>
                                 {option.name}
                             </option>
