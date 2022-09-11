@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import PostService from './API/PostService';
+import { useFetching } from './API/useFetching';
 import PostFilter from './components/PostFilter';
 import PostForm from './components/PostForm';
 import PostList from './components/PostList';
@@ -12,23 +13,17 @@ import './styles/App.css';
 function App() {
 
   const [post, setPost] = useState([]);
-  const [filter, setFilter] = useState({ sort: '', query: '' })
+  const [filter, setFilter] = useState({ sort: '', query: '' });
   const [modal, setModal] = useState(false);
   const sortedAndSearchedPost = usePosts(post, filter.sort, filter.query);
-  const [isPostsLoading, setIsPostsLoading] = useState(false);
+  const [fetchPosts, isPostsLoading, postError] = useFetching(async () => {
+    const post = await PostService.getAll()
+    setPost(post)
+  })
 
   useEffect(() => {
     fetchPosts()
   }, [])
-
-  async function fetchPosts() {
-    setIsPostsLoading(true)
-    setTimeout(async () => {
-      const posts = await PostService.getAll()
-      setPost(posts)
-      setIsPostsLoading(false)
-    }, 1000);
-  }
 
   const createPost = (newPost) => {
     setPost([...post, newPost])
@@ -53,8 +48,13 @@ function App() {
       <PostFilter
         filter={filter}
         setFilter={setFilter} />
+      {postError &&
+        <h1>Произошла ошибка ${postError}</h1>
+      }
       {isPostsLoading
-        ? <div style={{ display: 'flex', justifyContent: 'center', marginTop: 50 }}> <Loader /></div>
+        ? <div style={{ display: 'flex', justifyContent: 'center', marginTop: 50 }}>
+          <Loader />
+        </div>
         : <PostList remove={postRemove} posts={sortedAndSearchedPost} title="Посты про js" />
       }
 
